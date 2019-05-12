@@ -27,6 +27,8 @@ class Build : NukeBuild
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+    [Parameter("NuGet API key for push - Default is empty string")]
+    readonly string NugetApiKey;
 
     [Solution] readonly Solution Solution;
     [GitRepository] readonly GitRepository GitRepository;
@@ -35,6 +37,8 @@ class Build : NukeBuild
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath TestsDirectory => RootDirectory / "tests";
     AbsolutePath OutputDirectory => RootDirectory / "output";
+
+    readonly string NuGetSource = IsLocalBuild ? "Local" : "nuget.org";
 
     Target Clean => _ => _
         .Before(Restore)
@@ -59,10 +63,55 @@ class Build : NukeBuild
             DotNetBuild(s => s
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
-                .SetAssemblyVersion(GitVersion.GetNormalizedAssemblyVersion())
-                .SetFileVersion(GitVersion.GetNormalizedFileVersion())
+                .SetProperty("PackageVersion", GitVersion.NuGetVersionV2)
                 .SetInformationalVersion(GitVersion.InformationalVersion)
                 .EnableNoRestore());
+
+            DotNetPack(s => s
+                .SetConfiguration(Configuration)
+                .SetOutputDirectory(OutputDirectory)
+                .SetProperty("PackageVersion", GitVersion.NuGetVersionV2)
+                .SetInformationalVersion(GitVersion.InformationalVersion)
+                .EnableNoBuild()
+            );
         });
 
+    Target Test => _ => _
+        .DependsOn(Compile)
+        .Executes(() =>
+        {
+            var testProjects = GlobFiles(TestsDirectory, "**/*.csproj");
+
+            foreach (var testProject in testProjects)
+            {
+                DotNetTest(s => s
+                    .SetProjectFile(testProject)
+                    .SetConfiguration(Configuration)
+                    .SetResultsDirectory(OutputDirectory / "TestResults")
+                    .SetLogger("trx")
+                    .EnableNoBuild()
+                );
+            }
+        });
+
+    Target Publish => _ => _
+        .DependsOn(Clean)
+        .DependsOn(Compile)
+        .DependsOn(Test)
+        .Executes(() =>
+        {
+            if (!IsLocalBuild && string.IsNullOrEmpty(NugetApiKey))
+            {
+                Logger.Error("NuGet API key was not provided. Unable to push NuGet package.");
+                return;
+            }
+
+            var nugetPackage = GlobFiles(OutputDirectory, "*.nupkg").First();
+
+            DotNetNuGetPush(s => s
+                .SetSource(NuGetSource)
+                .SetTargetPath(nugetPackage)
+                .SetApiKey(NugetApiKey)
+            );
+        });
 }
