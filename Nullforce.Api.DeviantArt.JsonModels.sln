@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nullforce.Api.DeviantArt.JsonModels", "src\Nullforce.Api.DeviantArt.JsonModels.csproj", "{463CC304-583F-4DC9-A835-B569ECBB5D83}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{52CE3FFE-3B54-483D-A7DD-79EFF2CCC2D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52CE3FFE-3B54-483D-A7DD-79EFF2CCC2D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52CE3FFE-3B54-483D-A7DD-79EFF2CCC2D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{463CC304-583F-4DC9-A835-B569ECBB5D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{463CC304-583F-4DC9-A835-B569ECBB5D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{463CC304-583F-4DC9-A835-B569ECBB5D83}.Debug|x64.ActiveCfg = Debug|Any CPU
