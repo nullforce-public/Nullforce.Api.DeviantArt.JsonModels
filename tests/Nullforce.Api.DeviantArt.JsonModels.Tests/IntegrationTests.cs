@@ -9,10 +9,20 @@ namespace Nullforce.Api.DeviantArt.JsonModels.Tests
     public class IntegrationTests
     {
         [Fact]
-        public async void Test1()
+        public async void Placebo_WithDefaults_ReturnsResult()
         {
             var clientId = Environment.GetEnvironmentVariable("DEVIANTART_CLIENTID");
             var clientSecret = Environment.GetEnvironmentVariable("DEVIANTART_CLIENTSECRET");
+
+            if (string.IsNullOrEmpty(clientId))
+            {
+                Console.WriteLine("DEVIANTART_CLIENTID environment variable not found");
+            }
+
+            if (string.IsNullOrEmpty(clientSecret))
+            {
+                Console.WriteLine("DEVIANTART_CLIENTSECRET environment variable not found");
+            }
 
             var authUri = "https://www.deviantart.com/oauth2/token";
             authUri = authUri.SetQueryParams(new {
