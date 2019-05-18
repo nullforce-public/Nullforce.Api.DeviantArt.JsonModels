@@ -1,0 +1,43 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+variables:
+- group: Default
+
+steps:
+- task: Bash@3
+  inputs:
+    filePath: './build.sh'
+    arguments: '--target Test'
+  displayName: 'Run the Test target'
+  continueOnError: false
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: 'output/**/*.trx'
+    failTaskOnFailedTests: true
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'output'
+    Contents: '*.nupkg'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    ArtifactName: 'NuGet Package'
+
+- task: Bash@3
+  inputs:
+    filePath: './build.sh'
+    arguments: '--target Publish --nuget-api-key $(NUGETAPIKEY)'
+  displayName: 'Run the Publish target'
