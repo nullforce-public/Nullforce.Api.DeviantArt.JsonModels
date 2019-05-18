@@ -5,11 +5,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.1.0</Version>
     <Authors>Nullforce</Authors>
-    <Description>A C# wrapper for Derpibooru JSON models</Description>
+    <Description>A C# wrapper for DeviantArt JSON models</Description>
     <Copyright>Copyright 2019 nullforce</Copyright>
     <RepositoryUrl>https://github.com/nullforce-public/Nullforce.Api.DeviantArt.JsonModels</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>derpibooru</PackageTags>
+    <PackageTags>deviantart</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
