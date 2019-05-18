@@ -19,6 +19,8 @@ steps:
     arguments: '--target Test'
   displayName: 'Run the Test target'
   continueOnError: false
+  env:
+    DEVIANTART_CLIENTSECRET: $(DEVIANTART_CLIENTSECRET)
 
 - task: PublishTestResults@2
   inputs:
@@ -41,3 +43,5 @@ steps:
     filePath: './build.sh'
     arguments: '--target Publish --nuget-api-key $(NUGETAPIKEY)'
   displayName: 'Run the Publish target'
+  env:
+    DEVIANTART_CLIENTSECRET: $(DEVIANTART_CLIENTSECRET)
