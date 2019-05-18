@@ -23,7 +23,7 @@ namespace Nullforce.Api.DeviantArt.JsonModels
     public class BrowseMoreLikeThisPreviewRootJson
     {
         public string Seed { get; set; }
-        public AuthorJson Author { get; set; }
+        public UserJson Author { get; set; }
         [JsonProperty("more_from_artist")]
         public DeviationJson[] MoreFromArtist { get; set; }
         [JsonProperty("more_from_da")]

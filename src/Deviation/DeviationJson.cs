@@ -21,7 +21,7 @@ namespace Nullforce.Api.DeviantArt.JsonModels
         public bool? IsFavorited { get; set; }
         [JsonProperty("is_deleted")]
         public bool IsDeleted { get; set; }
-        public AuthorJson Author { get; set; }
+        public UserJson Author { get; set; }
         public DeviationStatsJson Stats { get; set; }
         [JsonProperty("published_time")]
         [JsonConverter(typeof(JavaScriptDateTimeConverter))] // JavaScriptDateTimeConverter, IsoDateTimeConverter
@@ -40,5 +40,31 @@ namespace Nullforce.Api.DeviantArt.JsonModels
         [JsonProperty("download_filesize")]
         public long? DownloadFilesize { get; set; }
         public string Excerpt { get; set; }
+
+        public class DailyDeviationJson
+        {
+            public string Body { get; set; }
+            public string Time { get; set; }
+            public UserJson Giver { get; set; }
+            public UserJson Suggester { get; set; }
+        }
+
+        public class DeviationContentJson
+        {
+            [JsonProperty("src")]
+            public Uri SourceUri { get; set; }
+            public long Height { get; set; }
+            public long Width { get; set; }
+            public bool? Transparency { get; set; }
+            [JsonProperty("filesize")]
+            public long? FileSize { get; set; }
+        }
+
+        public class DeviationStatsJson
+        {
+            public long Comments { get; set; }
+            [JsonProperty("favourites")]
+            public long Favorites { get; set; }
+        }
     }
 }

@@ -2,7 +2,7 @@ using System;
 
 namespace Nullforce.Api.DeviantArt.JsonModels
 {
-    public class AuthorJson
+    public class UserJson
     {
         public string UserId { get; set; }
         public string Username { get; set; }
