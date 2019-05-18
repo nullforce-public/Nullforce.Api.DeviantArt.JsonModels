@@ -5,9 +5,18 @@
         public CountryJson[] Results { get; set; }
     }
 
-    public class CountryJson
+    public class DataPrivacyRootJson
     {
-        public long CountryId { get; set; }
-        public string Name { get; set; }
+        public string Text { get; set; }
+    }
+
+    public class DataSubmissionRootJson
+    {
+        public string Text { get; set; }
+    }
+
+    public class DataTosRootJson
+    {
+        public string Text { get; set; }
     }
 }
