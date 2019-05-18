@@ -31,8 +31,8 @@ namespace Nullforce.Api.DeviantArt.JsonModels
         public DeviationContentJson Content { get; set; }
         [JsonProperty("thumbs")]
         public DeviationContentJson[] Thumbnails { get; set; }
-        public DeviationContentJson Videos { get; set; }
-        public DeviationContentJson Flash { get; set; }
+        public DeviationVideoJson[] Videos { get; set; }
+        public DeviationFlashJson Flash { get; set; }
         [JsonProperty("daily_deviation")]
         public DailyDeviationJson DailyDeviation { get; set; }
         public bool? IsMature { get; set; }
@@ -40,6 +40,12 @@ namespace Nullforce.Api.DeviantArt.JsonModels
         [JsonProperty("download_filesize")]
         public long? DownloadFilesize { get; set; }
         public string Excerpt { get; set; }
+
+        // public DeviationChallenge Challenge { get; set; }
+        // [JsonProperty("challenge_entry")]
+        // public DeviationChallengeEntry ChallengeEntry { get; set; }
+        // [JsonProperty("motion_book")]
+        // public DeviationMotionBook MotionBook { get; set; }
 
         public class DailyDeviationJson
         {
@@ -56,8 +62,24 @@ namespace Nullforce.Api.DeviantArt.JsonModels
             public long Height { get; set; }
             public long Width { get; set; }
             public bool? Transparency { get; set; }
-            [JsonProperty("filesize")]
             public long? FileSize { get; set; }
+        }
+
+        public class DeviationVideoJson
+        {
+            [JsonProperty("src")]
+            public Uri SourceUri { get; set; }
+            public string Quality { get; set; }
+            public long? FileSize { get; set; }
+            public long Duration { get; set; }
+        }
+
+        public class DeviationFlashJson
+        {
+            [JsonProperty("src")]
+            public Uri SourceUri { get; set; }
+            public long Height { get; set; }
+            public long Width { get; set; }
         }
 
         public class DeviationStatsJson
@@ -66,5 +88,39 @@ namespace Nullforce.Api.DeviantArt.JsonModels
             [JsonProperty("favourites")]
             public long Favorites { get; set; }
         }
+
+        // public class DeviationChallenge
+        // {
+        //     public string[] Type { get; set; }
+        //     public bool Completed { get; set; }
+        //     public string[] Tags { get; set; }
+        //     public bool Locked { get; set; } = false;
+        //     [JsonProperty("credit_deviation")]
+        //     public string CreditDeviationId { get; set; }
+        //     public string[] Media { get; set; }
+        //     [JsonProperty("level_label")]
+        //     public string LevelLabel { get; set; }
+        //     [JsonProperty("time_limit")]
+        //     public int TimeLimit { get; set; } = 0;
+        //     public string[] Levels { get; set; }
+        // }
+
+        // public class DeviationChallengeEntry
+        // {
+        //     public string ChallengeId { get; set; }
+        //     [JsonProperty("challenge_title")]
+        //     public string ChallengeTitle { get; set; }
+        //     public Deviation Challenge { get; set; }
+        //     [JsonProperty("timed_duration")]
+        //     public int TimedDuration { get; set; }
+        //     [JsonProperty("submission_time")]
+        //     public string SubmissionTime { get; set; }
+        // }
+
+        // public class DeviationMotionBook
+        // {
+        //     [JsonProperty("embed_url")]
+        //     public string EmbedUrl { get; set; }
+        // }
     }
 }
