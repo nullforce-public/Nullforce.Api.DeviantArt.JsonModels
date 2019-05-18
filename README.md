@@ -22,4 +22,7 @@ using Nullforce.Api.DeviantArt.JsonModels;
 
 ...
 
+var uri = "https://www.deviantart.com/api/v1/oauth2/placebo";
+
+var result = await uri.WithOAuthBearerToken(accessToken).GetJsonAsync<PlaceboJson>();
 ```
