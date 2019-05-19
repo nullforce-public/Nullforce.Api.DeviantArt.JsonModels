@@ -4,9 +4,9 @@ A C# wrapper for DeviantArt JSON models
 
 |||
 ----------------------|---
-**Build**             | TBD
-**NuGet**             | TBD
-**NuGet (prerelease)**| TBD
+**Build**             | [![Build Status](https://dev.azure.com/nullforce-public/ApiClients/_apis/build/status/Nullforce.Api.DeviantArt.JsonModels?branchName=master)](https://dev.azure.com/nullforce-public/ApiClients/_build/latest?definitionId=5&branchName=master)
+**NuGet**             | ![Nuget](https://img.shields.io/nuget/v/Nullforce.Api.DeviantArt.JsonModels.svg)
+**NuGet (prerelease)**| ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Nullforce.Api.DeviantArt.JsonModels.svg)
 
 
 ## Usage Example
